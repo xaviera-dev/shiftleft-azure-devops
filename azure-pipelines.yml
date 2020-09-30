@@ -30,3 +30,8 @@ steps:
       docker save -o web-dvwa.tar vulnerables/web-dvwa
       ./shiftleft image-scan -i ./web-dvwa.tar
   displayName: Running Container Image scan
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo $SG_CLIENT_ID
+  displayName: Running Terraform Scan
