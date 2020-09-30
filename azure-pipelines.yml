@@ -19,6 +19,9 @@ steps:
   displayName: Install ShiftLeft
 - task: CmdLine@2
   inputs:
+  env:
+    CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
+    SG_CLIENT_ID: $(SG_CLIENT_ID)
     script: |
       docker pull vulnerables/web-dvwa
       docker save -o web-dvwa.tar vulnerables/web-dvwa
