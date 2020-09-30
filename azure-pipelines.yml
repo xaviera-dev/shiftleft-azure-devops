@@ -48,4 +48,6 @@ jobs:
     inputs:
       script:
         git clone https://github.com/aws-samples/apn-blog/tree/tf_blog_v1.0/terraform_demo
+        ./shiftleft iac-assessment -p ./terraform_demo -r 64
+    displayName: Running Terraform Assessment
 
