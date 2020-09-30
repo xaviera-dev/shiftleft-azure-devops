@@ -15,11 +15,12 @@ steps:
     script: |
       curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
       chmod +x shiftleft
-      ./shiftleft -h
+      env |grep PATH
+  displayName: Install ShiftLeft
 - task: CmdLine@2
   inputs:
     script: |
       docker pull vulnerables/web-dvwa
       docker save -o web-dvwa.tar vulnerables/web-dvwa
-     # shiftleft image-scan -i ./web-dvwa.tar
+      ./shiftleft image-scan -i ./web-dvwa.tar
   displayName: Running Container Image scan
