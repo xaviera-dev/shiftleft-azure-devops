@@ -19,6 +19,7 @@ steps:
   displayName: Install ShiftLeft
 - task: CmdLine@2
   env:
+    #Need to map secret variable to environment variables
     CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
     CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     SG_CLIENT_ID: $(SG_CLIENT_ID)
