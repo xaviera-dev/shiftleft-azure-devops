@@ -28,7 +28,5 @@ steps:
     script: |
       docker pull vulnerables/web-dvwa
       docker save -o web-dvwa.tar vulnerables/web-dvwa
-      echo $CHKP_CLOUDGUARD_ID
-      echo $SG_CLIENT_ID
       ./shiftleft image-scan -i ./web-dvwa.tar
   displayName: Running Container Image scan
