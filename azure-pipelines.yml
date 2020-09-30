@@ -20,12 +20,14 @@ steps:
 - task: CmdLine@2
   env:
     CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
+    CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     SG_CLIENT_ID: $(SG_CLIENT_ID)
+    SG_SECRET_KEY: $(SG_SECRET_KEY)
   inputs:
     script: |
       docker pull vulnerables/web-dvwa
       docker save -o web-dvwa.tar vulnerables/web-dvwa
       echo $CHKP_CLOUDGUARD_ID
       echo $SG_CLIENT_ID
-     # ./shiftleft image-scan -i ./web-dvwa.tar
+      ./shiftleft image-scan -i ./web-dvwa.tar
   displayName: Running Container Image scan
