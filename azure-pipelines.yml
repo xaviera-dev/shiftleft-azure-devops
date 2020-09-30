@@ -2,36 +2,33 @@
 # In this pipeline we will run through a terraform scan, container image scan
 # and a repository scan.
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+- job:  ContainerImageScan
+  pool:
+    vmImage: 'ubuntu-latest'
 
-steps:
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
-  displayName: Installing Docker
-- task: CmdLine@2
-  inputs:
-    script: |
-      curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
-      chmod +x shiftleft
-      env |grep PATH
-  displayName: Install ShiftLeft
-- task: CmdLine@2
-  env:
-    #Need to map secret variable to environment variables
-    CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
-    CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    SG_CLIENT_ID: $(SG_CLIENT_ID)
-    SG_SECRET_KEY: $(SG_SECRET_KEY)
-  inputs:
-    script: |
-      docker pull vulnerables/web-dvwa
-      docker save -o web-dvwa.tar vulnerables/web-dvwa
-      ./shiftleft image-scan -i ./web-dvwa.tar
-  displayName: Running Container Image scan
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo $SG_CLIENT_ID
-  displayName: Running Terraform Scan
+  steps:
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+    displayName: Installing Docker
+  - task: CmdLine@2
+    inputs:
+      script: |
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
+        chmod +x shiftleft
+        env |grep PATH
+    displayName: Install ShiftLeft
+  - task: CmdLine@2
+    env:
+      #Need to map secret variable to environment variables
+      CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
+      CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
+      SG_CLIENT_ID: $(SG_CLIENT_ID)
+      SG_SECRET_KEY: $(SG_SECRET_KEY)
+    inputs:
+      script: |
+        docker pull vulnerables/web-dvwa
+        docker save -o web-dvwa.tar vulnerables/web-dvwa
+        ./shiftleft image-scan -i ./web-dvwa.tar
+    displayName: Running Container Image scan
