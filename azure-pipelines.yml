@@ -49,7 +49,7 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/chkp-ivanmar/openshift-public-clouds
-        ./shiftleft iac-assessment -p ./openshift-public-clouds/aws/terraform/ -r -64
+        ./shiftleft iac-assessment -p ./openshift-public-clouds/aws/terraform/ -r -64 |jq .
     displayName: Running Terraform Assessment
 
 - job: SourceCodeScanning
