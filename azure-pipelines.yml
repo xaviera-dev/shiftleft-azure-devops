@@ -73,3 +73,23 @@ jobs:
         git clone https://github.com/cr0hn/vulnerable-node
         ./shiftleft sourceguard -s ./vulnerable-node
     displayName: Running Source Code scan
+
+- job: SourceCodeScanningOnWindows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: CmdLine@2
+    inputs:
+      script: |
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft
+    displayName: Install ShiftLeft
+  - task: CmdLine@2
+    env:
+      #Map secret variables to environment variables
+      SG_CLIENT_ID: $(SG_CLIENT_ID)
+      SG_SECRET_KEY: $(SG_SECRET_KEY)
+    inputs:
+      script: |
+        git clone https://github.com/cr0hn/vulnerable-node
+        ./shiftleft sourceguard -s ./vulnerable-node
+    displayName: Running Source Code scan
