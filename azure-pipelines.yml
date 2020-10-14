@@ -81,7 +81,8 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft.exe
+        shiftleft.exe -v
     displayName: Install ShiftLeft
   - task: CmdLine@2
     env:
