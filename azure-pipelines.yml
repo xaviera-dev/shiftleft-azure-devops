@@ -79,12 +79,6 @@ jobs:
     vmImage: 'windows-latest'
   steps:
   - task: CmdLine@2
-    inputs:
-      script: |
-        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft.exe
-        shiftleft.exe -v
-    displayName: Install ShiftLeft
-  - task: CmdLine@2
     env:
       #Map secret variables to environment variables
       SG_CLIENT_ID: $(SG_CLIENT_ID)
@@ -92,5 +86,6 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/cr0hn/vulnerable-node
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft.exe
         shiftleft.exe code-scan -s ./vulnerable-node
     displayName: Running Source Code scan
