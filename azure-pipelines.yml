@@ -48,8 +48,8 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        git clone https://github.com/chkp-rolandop/cloudguard-iac-noncompliant-terraform
-        ./shiftleft iac-assessment -p ./cloudguard-iac-noncompliant-terraform -r -64 |jq .
+        git clone https://github.com/chkp-rolandop/cloudguard-iac-noncompliant-terraform/
+        ./shiftleft iac-assessment -p ./cloudguard-iac-noncompliant-terraform/aws/ -r -64 |jq .
     displayName: Running Terraform Assessment
 
 - job: SourceCodeScanning
