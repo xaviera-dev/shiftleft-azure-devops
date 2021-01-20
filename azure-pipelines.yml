@@ -15,7 +15,7 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
   - task: CmdLine@2
@@ -38,7 +38,7 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
   - task: CmdLine@2
@@ -60,7 +60,7 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.27/shiftleft -o shiftleft
+        curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
   - task: CmdLine@2
@@ -71,7 +71,7 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/chkp-dhouari/CloudGuard-ShiftLeft-CICD
-        ./shiftleft code-scan -s ./CloudGuard-ShiftLeft-CICD
+        ./shiftleft code-scan -s ./CloudGuard-ShiftLeft-CICD/
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningOnWindows
