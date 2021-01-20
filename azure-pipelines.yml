@@ -71,7 +71,8 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/chkp-dhouari/CloudGuard-ShiftLeft-CICD
-        ./shiftleft code-scan -s ./CloudGuard-ShiftLeft-CICD/
+        cd CloudGuard-ShiftLeft-CICD
+        ./shiftleft code-scan -s .
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningOnWindows
