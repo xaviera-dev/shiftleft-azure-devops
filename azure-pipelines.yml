@@ -70,8 +70,8 @@ jobs:
       SG_SECRET_KEY: $(SG_SECRET_KEY)
     inputs:
       script: |
-        git clone https://github.com/cr0hn/vulnerable-node
-        ./shiftleft code-scan -s ./vulnerable-node
+        git clone https://github.com/chkp-dhouari/CloudGuard-ShiftLeft-CICD
+        ./shiftleft code-scan -s ./CloudGuard-ShiftLeft-CICD
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningOnWindows
