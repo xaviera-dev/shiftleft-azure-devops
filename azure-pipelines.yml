@@ -25,9 +25,10 @@ jobs:
       SG_SECRET_KEY: $(SG_SECRET_KEY)
     inputs:
       script: |
-        docker pull vulnerables/web-dvwa
-        docker save -o web-dvwa.tar vulnerables/web-dvwa
-        ./shiftleft image-scan -i ./web-dvwa.tar
+        git clone https://github.com/chkp-rolandop/demo-app
+        docker build -t chkp-rolandop/demo-app ./demo-app/
+        docker save -o demo-app.tar chkp-rolandop/demo-app
+        ./shiftleft image-scan -i demo-app.tar
     displayName: Running Container Image scan
 
 - job: TerraformScan
