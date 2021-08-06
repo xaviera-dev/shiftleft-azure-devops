@@ -28,7 +28,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
     
-  container: 'checkpoint/shiftleft'
+    container: 'checkpoint/shiftleft:0.0.31'
   steps:
   - task: CmdLine@2
     env:
