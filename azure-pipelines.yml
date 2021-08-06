@@ -30,6 +30,7 @@ jobs:
     
   container: 'checkpoint/shiftleft:0.0.31'
   steps:
+  - task: CmdLine@2
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
