@@ -30,7 +30,7 @@ jobs:
     
   container: 'checkpoint/shiftleft:0.0.31'
   steps:
-    bash: |
+  - bash: |
         git clone https://github.com/chkp-rolandop/demo-app
         shiftleft code-scan -t 900 -s ./demo-app
     env:
