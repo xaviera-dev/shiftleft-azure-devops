@@ -24,7 +24,6 @@ jobs:
         ./shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan
 
-jobs:
 - job: SourceCodeScanningDocker
   pool:
     vmImage: 'ubuntu-latest'
