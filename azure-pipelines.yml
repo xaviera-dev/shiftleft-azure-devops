@@ -24,6 +24,22 @@ jobs:
         ./shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan
 
+jobs:
+- job: SourceCodeScanningDocker
+  pool:
+    vmImage: 'ubuntu-latest'
+    
+  container: 'checkpoint/shiftleft'
+  - task: CmdLine@2
+    env:
+      #Map secret variables to environment variables
+      CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
+      CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
+    inputs:
+      script: |
+        git clone https://github.com/chkp-rolandop/demo-app
+        ./shiftleft code-scan -t 900 -s ./demo-app
+    displayName: Running Source Code scan
 
 - job:  ContainerImageScan
   pool:
