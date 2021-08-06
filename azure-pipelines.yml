@@ -28,7 +28,9 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
     
-  container: 'checkpoint/shiftleft:0.0.31'
+  container:
+    image: checkpoint/shiftleft:0.0.31'
+    options: --interactive
   steps:
   - bash: |
         git clone https://github.com/chkp-rolandop/demo-app
