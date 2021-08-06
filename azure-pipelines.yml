@@ -21,7 +21,7 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/chkp-rolandop/demo-app
-        shiftleft code-scan -t 900 -s ./demo-app
+        ./shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningDocker
@@ -38,7 +38,7 @@ jobs:
     inputs:
       script: |
         git clone https://github.com/chkp-rolandop/demo-app
-        ./shiftleft code-scan -t 900 -s ./demo-app
+        shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan
 
 - job:  ContainerImageScan
