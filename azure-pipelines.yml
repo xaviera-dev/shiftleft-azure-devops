@@ -29,6 +29,7 @@ jobs:
     vmImage: 'ubuntu-latest'
     
   container: 'checkpoint/shiftleft'
+  steps:
   - task: CmdLine@2
     env:
       #Map secret variables to environment variables
