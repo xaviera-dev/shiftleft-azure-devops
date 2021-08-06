@@ -28,15 +28,13 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
     
-    container: 'checkpoint/shiftleft:0.0.31'
+  container: 'checkpoint/shiftleft:0.0.31'
   steps:
-  - task: CmdLine@2
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    inputs:
-      script: |
+    script: |
         git clone https://github.com/chkp-rolandop/demo-app
         shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan
