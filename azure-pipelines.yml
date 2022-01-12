@@ -30,7 +30,7 @@ jobs:
     
   container:
     image: checkpoint/shiftleft:latest
-    options: --entrypoint /bin/sh
+    options: --interactive
   steps:
   - task: CmdLine@2
     env:
