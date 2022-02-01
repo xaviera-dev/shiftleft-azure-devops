@@ -47,7 +47,8 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        shiftleft code-scan -t 900 -s ./demo-app
+        ls -la
+        #        shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan using Docker image
 
 - job:  ContainerImageScan
