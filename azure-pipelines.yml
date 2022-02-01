@@ -27,6 +27,9 @@ jobs:
 - job: SourceCodeScanningDocker
   pool:
     vmImage: 'ubuntu-latest'
+
+  steps:
+  - script: git clone https://github.com/chkp-rolandop/demo-app
     
   container:
     image: cpemergingtech.azurecr.io/shiftleft-bash:latest
@@ -39,7 +42,6 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        git clone https://github.com/chkp-rolandop/demo-app
         shiftleft code-scan -t 900 -s ./demo-app
     displayName: Running Source Code scan using Docker image
 
