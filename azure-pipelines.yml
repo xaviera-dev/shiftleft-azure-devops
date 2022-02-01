@@ -108,5 +108,5 @@ jobs:
     inputs:
       script: |
         curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft.exe
-        shiftleft.exe code-scan -s ./vulnerable-node
+        shiftleft.exe code-scan -s ./
     displayName: Running Source Code scan on Windows Agent
