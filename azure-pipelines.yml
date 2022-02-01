@@ -8,6 +8,10 @@ resources:
     type: github
     endpoint: chkp-rolandop
     name: chkp-rolandop/demo-app
+  - repository: iac-noncompliant
+    type: github
+    endpoint: chkp-rolandop
+    name: chkp-rolandop/cloudguard-iac-noncompliant-terraform
 
 jobs:
 - job: SourceCodeScanning
@@ -55,6 +59,7 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
+  - checkout: demo-app
   - task: DockerInstaller@0
     inputs:
       dockerVersion: '17.09.0-ce'
@@ -72,9 +77,8 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        git clone https://github.com/chkp-rolandop/demo-app
-        docker build -t chkp-rolandop/demo-app ./demo-app/
-        docker save -o demo-app.tar chkp-rolandop/demo-app
+        docker build -t demo-app .
+        docker save -o demo-app.tar demo-app
         ./shiftleft image-scan -i demo-app.tar
     displayName: Running Container Image scan
 
@@ -83,6 +87,7 @@ jobs:
     vmImage: 'ubuntu-latest'
   
   steps:
+  - checkout: iac-noncompliant
   - task: CmdLine@2
     inputs:
       script: |
@@ -96,14 +101,14 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        git clone https://github.com/chkp-rolandop/cloudguard-iac-noncompliant-terraform/
-        ./shiftleft iac-assessment -w -p ./cloudguard-iac-noncompliant-terraform/aws/ -r -64
+        ./shiftleft iac-assessment -w -p ./aws/ -r -64
     displayName: Running Terraform Assessment
 
 - job: SourceCodeScanningOnWindows
   pool:
     vmImage: 'windows-latest'
   steps:
+  - checkout: demo-app
   - task: CmdLine@2
     env:
       #Map secret variables to environment variables
@@ -111,7 +116,6 @@ jobs:
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
       script: |
-        git clone https://github.com/cr0hn/vulnerable-node
         curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/windows/amd64/0.0.24/shiftleft.exe -o shiftleft.exe
         shiftleft.exe code-scan -s ./vulnerable-node
     displayName: Running Source Code scan on Windows Agent
