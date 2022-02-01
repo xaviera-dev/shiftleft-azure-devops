@@ -31,8 +31,7 @@ jobs:
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
     inputs:
-      script: |
-        ./shiftleft code-scan -t 900 -s ./
+      script: ./shiftleft code-scan -t 900 -s ./
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningDocker
@@ -44,14 +43,11 @@ jobs:
     endpoint: cpemergingtech
   steps:
   - checkout: demo-app
-  - task: CmdLine@2
+  - script: shiftleft code-scan -t 900 -s ./
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    inputs:
-      script: |
-        shiftleft code-scan -t 900 -s ./
     displayName: Running Source Code scan using Docker image
 
 - job:  ContainerImageScan
