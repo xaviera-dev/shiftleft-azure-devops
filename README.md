@@ -12,8 +12,15 @@ This azure pipelines yaml file will demo the Check Point CloudGuard ShiftLeft CI
 
 ## Usage
 
+This yaml file contains different methods of using CloudGuard Shiftleft.
+
+ - Downloading shiftleft executable
+ - Using a container job to execute shiftleft
+        - This method requires a container that includes bash and does not have an entrypoint.  Please see provided Dockerfile for example.
+        - In this pipeline, it is assumed that you have an Azure Container Registry where the shiftleft container image is stored.
+
 ### Generate CloudGuard API Token
 
-### Generate SourceGuard Token
-
 ### Create pipeline project in Azure-Devops
+
+https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Ctfs-2018-2%2Cbrowser
