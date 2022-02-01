@@ -25,16 +25,14 @@ jobs:
         curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
-  - task: CmdLine@2
+  - script: ./shiftleft code-scan -t 900 -s ./
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    inputs:
-      script: ./shiftleft code-scan -t 900 -s ./
     displayName: Running Source Code scan
 
-- job: SourceCodeScanningDocker
+- job: SourceCodeScanningWithDocker
   pool:
     vmImage: 'ubuntu-latest'
     
@@ -48,7 +46,7 @@ jobs:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    displayName: Running Source Code scan using Docker image
+    displayName: Running Source Code scan using ShiftLeft Docker image
 
 - job:  ContainerImageScan
   pool:
@@ -90,14 +88,11 @@ jobs:
         curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
-  - task: CmdLine@2
+  - script: ./shiftleft iac-assessment -w -p ./aws/ -r -64
     env:
     #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
-    inputs:
-      script: |
-        ./shiftleft iac-assessment -w -p ./aws/ -r -64
     displayName: Running Terraform Assessment
 
 - job: SourceCodeScanningOnWindows
