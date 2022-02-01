@@ -2,6 +2,13 @@
 # In this pipeline we will run through a terraform scan, container image scan
 # and a repository scan.
 
+resources:
+  repositories:
+  - repository: demo-app
+    type: github
+    endpoint: chkp-rolandop
+    name: chkp-rolandop/demo-app
+
 jobs:
 - job: SourceCodeScanning
   pool:
@@ -27,14 +34,12 @@ jobs:
 - job: SourceCodeScanningDocker
   pool:
     vmImage: 'ubuntu-latest'
-
-  steps:
-  - script: git clone https://github.com/chkp-rolandop/demo-app
     
   container:
     image: cpemergingtech.azurecr.io/shiftleft-bash:latest
     endpoint: cpemergingtech
   steps:
+  - checkout: demo-app
   - task: CmdLine@2
     env:
       #Map secret variables to environment variables
