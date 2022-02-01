@@ -29,8 +29,7 @@ jobs:
     vmImage: 'ubuntu-latest'
     
   container:
-    image: checkpoint/shiftleft:latest
-    options: --interactive --entrypoint /bin/sh
+    image: cpemergingtech.azurecr.io/shiftleft-bash:latest
   steps:
   - task: CmdLine@2
     env:
