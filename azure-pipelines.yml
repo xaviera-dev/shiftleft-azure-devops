@@ -30,6 +30,7 @@ jobs:
     
   container:
     image: cpemergingtech.azurecr.io/shiftleft-bash:latest
+    endpoint: cpemergingtech
   steps:
   - task: CmdLine@2
     env:
