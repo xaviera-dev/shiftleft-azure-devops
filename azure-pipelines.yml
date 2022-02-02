@@ -25,11 +25,12 @@ jobs:
         curl -G https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.29/shiftleft -o shiftleft
         chmod +x shiftleft
     displayName: Install ShiftLeft
-  - script: ./shiftleft code-scan -t 900 -s ./
+  - script: ./shiftleft code-scan -t 900 -e $CHKP_CLOUDGUARD_ENV -r -2003 -s ./
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
+      CHKP_CLOUDGUARD_ENV: $(CHKP_CLOUDGUARD_ENV)
     displayName: Running Source Code scan
 
 - job: SourceCodeScanningWithDocker
@@ -41,11 +42,12 @@ jobs:
     endpoint: cpemergingtech
   steps:
   - checkout: demo-app
-  - script: shiftleft code-scan -t 900 -s ./
+  - script: shiftleft code-scan -t 900 -e $CHKP_CLOUDGUARD_ENV -r -2003 -s ./
     env:
       #Map secret variables to environment variables
       CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
       CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
+      CHKP_CLOUDGUARD_ENV: $(CHKP_CLOUDGUARD_ENV)
     displayName: Running Source Code scan using ShiftLeft Docker image
 
 - job:  ContainerImageScan
