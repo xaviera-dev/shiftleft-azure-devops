@@ -14,6 +14,16 @@ resources:
     name: chkp-rolandop/cloudguard-iac-noncompliant-terraform
 
 jobs:
+- job: SpectralScanning
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - checkout: demo-app
+  - script: curl -L 'https://get.spectralops.io/latest/x/sh?dsn=$(SPECTRAL_DSN)' | sh
+    displayName: 'Install Spectral'
+  - script: $HOME/.spectral/spectral scan --ok --dsn $(SPECTRAL_DSN)
+    displayName: 'Spectral Scan'
+jobs:
 - job: SourceCodeScanning
   pool:
     vmImage: 'ubuntu-latest'
