@@ -23,7 +23,7 @@ jobs:
     displayName: 'Install Spectral'
   - script: $HOME/.spectral/spectral scan --ok --dsn $(SPECTRAL_DSN)
     displayName: 'Spectral Scan'
-jobs:
+
 - job: SourceCodeScanning
   pool:
     vmImage: 'ubuntu-latest'
