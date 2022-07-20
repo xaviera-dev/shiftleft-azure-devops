@@ -6,12 +6,12 @@ resources:
   repositories:
   - repository: demo-app
     type: github
-    endpoint: chkp-rolandop
-    name: chkp-rolandop/demo-app
+    endpoint: chkp-xaviera
+    name: chkp-xaviera/demo-app
   - repository: iac-noncompliant
     type: github
-    endpoint: chkp-rolandop
-    name: chkp-rolandop/cloudguard-iac-noncompliant-terraform
+    endpoint: chkp-xaviera
+    name: chkp-xaviera/cloudguard-iac-noncompliant-terraform
 
 jobs:
 - job: SpectralScanning
